@@ -1,0 +1,63 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    padding: 25% 0;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* * * * * * * ** ** * *  * ** *  */
+
+#container {
+    padding: 0 7%;
+}
+
+.page {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 20px 0;
+}
+
+.day-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+}
+
+.day-toggle:hover {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(188, 188, 188);
+    cursor: pointer;
+}
+
+.unset {
+    background-color: rgb(216, 216, 216)
+}
+
+.done {
+    background-color: rgb(126, 206, 120);
+    text-decoration: line-through;
+}
+
+.failed {
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
