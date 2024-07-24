@@ -1,19 +1,23 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Rubik', sans-serif;
     padding: 0;
     margin: 0;
 }
 
 body {
     padding: 0;
-    margin: 0;
-    padding: 25% 0;
+    margin: auto;
+    padding: 15% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 button {
@@ -26,38 +30,177 @@ button {
     padding: 0 7%;
 }
 
+#container > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 20px 0;
+}
+
+.reset-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: hsl(0deg 0% 40%);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 250ms;
+}
+
+.reset-button:hover {
+    background: hsl(0deg 0% 60%);
+}
+
 .page {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    padding: 20px 0;
+    width: fit-content;
+    gap: 10px;
+    justify-content: center;
+    padding: 0 0 50px 0;
+}
+.day-toggle {
+    margin: 5px 0;
+    width: 100px;
+    height: 80px;
 }
 
-.day-toggle {
+.pushable {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+}
+
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: hsl(0deg 0% 0% / 0.0);
+    will-change: transform;
+    transform: translateY(5px);
+    transition:
+        transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: linear-gradient(to left,
+            hsl(340deg 100% 16%) 0%,
+            hsl(340deg 100% 32%) 8%,
+            hsl(340deg 100% 32%) 92%,
+            hsl(340deg 100% 16%) 100%);
+}
+
+.front {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-}
-
-.day-toggle:hover {
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(188, 188, 188);
-    cursor: pointer;
-}
-
-.unset {
-    background-color: rgb(216, 216, 216)
-}
-
-.done {
-    background-color: rgb(126, 206, 120);
-    text-decoration: line-through;
-}
-
-.failed {
-    background-color: rgb(255, 0, 0);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    font-size: 1.1rem;
     color: white;
+    background: hsl(345deg 100% 47%);
+    will-change: transform;
+    transform: translateY(-6px);
+    transition:
+        transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+/* Unset state (grey) */
+.pushable.unset .edge {
+    background: linear-gradient(to left,
+            hsl(0deg 0% 40%) 0%,
+            hsl(0deg 0% 60%) 8%,
+            hsl(0deg 0% 60%) 92%,
+            hsl(0deg 0% 40%) 100%);
+}
+
+.pushable.unset .front {
+    background: hsl(0deg 0% 70%);
+}
+
+/* Done state (green) */
+.pushable.done .edge {
+    background: linear-gradient(to left,
+            hsl(120deg 100% 16%) 0%,
+            hsl(120deg 100% 32%) 8%,
+            hsl(120deg 100% 32%) 92%,
+            hsl(120deg 100% 16%) 100%);
+}
+
+.pushable.done .front {
+    background: hsl(120deg 100% 47%);
+    color: black;
+    text-decoration: line-through;
+    transform: translateY(-2px);
+}
+
+.pushable.done .shadow {
+    transform: translateY(1px);
+}
+
+/* Failed state (red) */
+.pushable.failed .edge {
+    background: linear-gradient(to left,
+            hsl(340deg 100% 16%) 0%,
+            hsl(340deg 100% 32%) 8%,
+            hsl(340deg 100% 32%) 92%,
+            hsl(340deg 100% 16%) 100%);
+}
+
+.pushable.failed .front {
+    background: hsl(345deg 100% 47%);
+}
+
+.pushable:hover {
+    filter: brightness(110%);
+}
+
+.pushable:hover .front {
+    transform: translateY(-8px);
+    transition:
+        transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.pushable.done:hover .front {
+    transform: translateY(-4px);
+}
+
+.pushable:active .front {
+    transform: translateY(-3px);
+    transition: transform 34ms;
+}
+
+.pushable:hover .shadow {
+    transform: translateY(7px);
+    transition:
+        transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.pushable.done:hover .shadow {
+    transform: translateY(3px);
+}
+
+.pushable:active .shadow {
+    transform: translateY(2px);
+    transition: transform 34ms;
+}
+
+.pushable:focus:not(:focus-visible) {
+    outline: none;
 }

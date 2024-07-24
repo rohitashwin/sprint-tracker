@@ -1,3 +1,9 @@
+let resetButton = document.getElementsByClassName('reset-button')[0];
+resetButton.addEventListener('click', () => {
+    localStorage.clear();
+    location.reload();
+});
+
 let days = localStorage.getItem('days');
 if (!days || days === 'null') {
     days = prompt('Enter the number of days to track:');
@@ -24,8 +30,18 @@ for (let i = 0; i < Math.ceil(days / buttonsPerPage); i++) {
     for (let j = 1; j <= buttonsPerPage && (i * buttonsPerPage + j) <= days; j++) {
         const dayNumber = i * buttonsPerPage + j;
         const button = document.createElement('button');
-        button.classList.add('day-toggle');
-        button.textContent = `Day ${dayNumber}`;
+        button.className = 'day-toggle unset';
+        button.classList.add('pushable');
+        const shadow = document.createElement('span');
+        shadow.classList.add('shadow');
+        button.appendChild(shadow);
+        const edge = document.createElement('span');
+        edge.classList.add('edge');
+        button.appendChild(edge);
+        const front = document.createElement('span');
+        front.classList.add('front');
+        front.innerHTML = `Day ${dayNumber}`;
+        button.appendChild(front);
         
         const savedState = getButtonState(dayNumber);
         button.classList.add(savedState);
