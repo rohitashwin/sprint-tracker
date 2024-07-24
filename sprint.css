@@ -12,8 +12,7 @@ html {
 
 body {
     padding: 0;
-    margin: auto;
-    padding: 15% 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +26,9 @@ button {
 /* * * * * * * ** ** * *  * ** *  */
 
 #container {
-    padding: 0 7%;
+    padding: 11.5vh 0 0 0;
+    height: 100%;
+    width: fit-content;
 }
 
 #container > header {
